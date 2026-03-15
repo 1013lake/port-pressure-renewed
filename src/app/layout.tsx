@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://portpressure.alberni.dev"),
+  metadataBase: new URL("https://portpressure.netlify.app"),
   title: "Port Pressure Solutions",
   description:
     "Professional pressure washing services on Vancouver Island. Residential and commercial cleaning.",
