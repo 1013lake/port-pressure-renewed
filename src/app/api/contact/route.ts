@@ -5,11 +5,15 @@ import { getStore } from "@netlify/blobs";
 const MAX_EMAILS_PER_DAY = 5;
 
 function getBookingsStore() {
-  return getStore({ name: "bookings", consistency: "strong" });
+  const siteID = process.env.NETLIFY_SITE_ID || "";
+  const token = process.env.NETLIFY_API_TOKEN || "";
+  return getStore({ name: "bookings", siteID, token });
 }
 
 function getRateLimitStore() {
-  return getStore({ name: "ratelimit", consistency: "strong" });
+  const siteID = process.env.NETLIFY_SITE_ID || "";
+  const token = process.env.NETLIFY_API_TOKEN || "";
+  return getStore({ name: "ratelimit", siteID, token });
 }
 
 function todayKey(ip: string) {

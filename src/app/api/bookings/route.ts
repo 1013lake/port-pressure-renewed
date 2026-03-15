@@ -24,9 +24,15 @@ async function writeLocalBookings(data: Record<string, string[]>) {
   await writeFile(join(dir, "slots.json"), JSON.stringify(data, null, 2));
 }
 
-// --- Netlify Blobs ---
+// --- Netlify Blobs (explicit API token auth) ---
 function getBookingsStore() {
-  return getStore("bookings");
+  const siteID = process.env.NETLIFY_SITE_ID || "";
+  const token = process.env.NETLIFY_API_TOKEN || "";
+  return getStore({
+    name: "bookings",
+    siteID,
+    token,
+  });
 }
 
 function dateKey(date: string) {
