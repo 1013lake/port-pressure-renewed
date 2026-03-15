@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
-    domains: ["i.imgur.com", "imgur.com"],
+    domains: ["i.imgur.com", "imgur.com", "port-pressure.local"],
   },
+  transpilePackages: ["@nextwp/core"],
 };
 
 export default nextConfig;

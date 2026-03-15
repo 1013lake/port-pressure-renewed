@@ -1,36 +1,35 @@
-const testimonials = [
-  {
-    name: "Jamie Roberts",
-    location: "Port Alberni",
-    text: "Port Pressure Solutions has been an absolute game-changer for my business. Their service is top-notch and their team really understands the local community.",
-  },
-  {
-    name: "Alexis Green",
-    location: "Nanaimo",
-    text: "They helped me streamline my operations and saved me countless hours. Quick, efficient, and always go above and beyond.",
-  },
-  {
-    name: "Charlie MacDonald",
-    location: "Victoria",
-    text: "Working with Port Pressure has been an amazing experience. Invaluable insight and excellent customer service. Will use them again for sure!",
-  },
-];
+interface TestimonialItem {
+  name: string;
+  location: string;
+  text: string;
+}
 
-export default function Testimonials() {
+export interface TestimonialsProps {
+  acf_fc_layout: "testimonials";
+  tag_line?: string;
+  title?: string;
+  items?: TestimonialItem[];
+}
+
+export function Testimonials({
+  tag_line = "Testimonials",
+  title = "What Our Clients Say",
+  items = [],
+}: TestimonialsProps) {
   return (
-    <section className="bg-slate-800 py-20 lg:py-28">
+    <section className="bg-navy py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-base font-semibold uppercase tracking-widest text-cyan-400">
-            Testimonials
+            {tag_line}
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            What Our Clients Say
+            {title}
           </h2>
         </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {testimonials.map((t) => (
+          {items.map((t) => (
             <div
               key={t.name}
               className="rounded-xl bg-white/5 border border-white/10 p-8"
@@ -55,10 +54,6 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
-
-        <p className="mt-10 text-center text-xs text-slate-500">
-          * Testimonials shown are examples for demonstration purposes. Our Google Business profile is currently being set up — real reviews coming soon.
-        </p>
       </div>
     </section>
   );

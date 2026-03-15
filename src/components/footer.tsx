@@ -1,76 +1,105 @@
-import React from "react";
+import Link from "next/link";
 
-// Define a type for each link object
-interface Link {
-  href: string;
-  text: string;
-}
+const locations = [
+  "Port Alberni",
+  "Qualicum Beach",
+  "Parksville",
+  "Courtenay",
+  "Campbell River",
+  "Nanaimo",
+  "Duncan",
+  "Ladysmith",
+];
 
-// FooterSection component to handle each section (Locations, Services, Follow Us)
-const FooterSection = ({ title, links }: { title: string; links: Link[] }) => (
-  <div>
-    <h3 className="text-lg font-semibold">{title}</h3>
-    <ul className="mt-4 space-y-2 text-sm">
-      {links.map((link, index) => (
-        <li key={index}>
-          <a
-            href={link.href}
-            className="hover:text-blue-400"
-            aria-label={`Go to ${link.text}`}
-          >
-            {link.text}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-const Footer = () => {
-  // Links for each section in arrays
-  const locationsLinks: Link[] = [
-    { href: "#", text: "Port Alberni" },
-    { href: "#", text: "Qualicum Beach" },
-    { href: "#", text: "Parksville" },
-    { href: "#", text: "Courtenay" },
-    { href: "#", text: "Campbell River" },
-    { href: "#", text: "Nanaimo" },
-    { href: "#", text: "Duncan" },
-    { href: "#", text: "Ladysmith" },
-  ];
-
-  const servicesLinks: Link[] = [
-    { href: "#", text: "Pressure Washing" },
-    { href: "#", text: "Heavy Duty Equipment Cleaning" },
-    { href: "#", text: "Driveway Cleaning" },
-    { href: "#", text: "Fence Cleaning" },
-    { href: "#", text: "Bin Cleaning" },
-    { href: "#", text: "Dumpster Pad Cleaning" },
-    { href: "#", text: "Cement Cleaning" },
-    { href: "#", text: "Deck Cleaning" },
-  ];
-
-  const followUsLinks: Link[] = [
-    { href: "#", text: "Facebook" },
-    { href: "#", text: "Instagram" },
-  ];
-
+export default function Footer() {
   return (
-    <div className="bg-gradient-to-r from-[#000141] to-[#006492] text-white py-8">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Using FooterSection component for each section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <FooterSection title="Locations" links={locationsLinks} />
-          <FooterSection title="Services" links={servicesLinks} />
-          <FooterSection title="Follow Us" links={followUsLinks} />
+    <footer className="bg-slate-950 text-white">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <h3 className="text-lg font-bold">Port Pressure</h3>
+            <p className="mt-3 text-sm text-slate-400 leading-relaxed">
+              Professional pressure washing services across Vancouver Island.
+              Residential and commercial.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+              Pages
+            </h4>
+            <ul className="mt-4 space-y-2">
+              {[
+                { name: "Home", href: "/" },
+                { name: "Services", href: "/services" },
+                { name: "Schedule", href: "/schedule" },
+                { name: "Contact", href: "/contact" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-slate-300 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+              Service Areas
+            </h4>
+            <ul className="mt-4 space-y-2">
+              {locations.map((loc) => (
+                <li key={loc} className="text-sm text-slate-300">
+                  {loc}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
+              Follow Us
+            </h4>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a
+                  href="#"
+                  className="text-sm text-slate-300 hover:text-white transition-colors"
+                >
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-sm text-slate-300 hover:text-white transition-colors"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-sm text-slate-300 hover:text-white transition-colors"
+                >
+                  TikTok
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="mt-12 border-t border-gray-700 pt-6 text-center text-sm">
-          <p>&copy; 2025 Port Pressure Solutions, All rights reserved.</p>
+        <div className="mt-12 border-t border-white/10 pt-8 text-center">
+          <p className="text-sm text-slate-400">
+            &copy; {new Date().getFullYear()} Port Pressure Solutions. All
+            rights reserved.
+          </p>
         </div>
       </div>
-    </div>
+    </footer>
   );
-};
-
-export default Footer;
+}

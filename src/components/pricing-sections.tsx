@@ -1,146 +1,145 @@
 import { CheckIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
-// Example tiers data
 const tiers = [
   {
-    name: "Residential Bin Cleaning (One-Time & Subscription)",
-    id: "tier-residential",
-    href: "#", // Will be ignored as it's hardcoded below
-    priceMonthly: "$40 (One-Time)",
+    name: "Residential Bin Cleaning",
+    price: "$30",
+    period: "one-time",
     description:
-      "One-time cleaning for your residential bins (recycling, organics, and garbage). Keep your bins fresh with a monthly subscription for all 3 bins at $60 per month.",
+      "One-time cleaning for your residential bins. Keep them fresh and odor-free.",
     features: [
-      "$40 for a one-time cleaning of 1 bin",
-      "$60 for a monthly subscription to clean all 3 bins (recycling, organics, and garbage)",
-      "Removal of dirt, grime, and odors",
+      "$30 for a single bin cleaning",
+      "$60 for all 3 bins",
+      "Recycling, organics, and garbage",
       "Eco-friendly cleaning products",
-      "Email reminders for your next clean",
     ],
     featured: false,
   },
   {
-    name: "Commercial Dumpster Pad Cleaning",
-    id: "tier-commercial-cleaning",
-    href: "#", // Will be ignored as it's hardcoded below
-    priceMonthly: "$300 (Initial) + $200/month",
+    name: "Commercial Dumpster Pad",
+    price: "$350",
+    period: "initial clean",
     description:
-      "Initial $350 for deep cleaning of your commercial dumpster pad. Following that, a monthly fee of $200 is applied for regular cleaning.",
+      "Deep cleaning for commercial dumpster pads with ongoing monthly maintenance.",
     features: [
       "$350 initial deep cleaning",
-      "$200 monthly recurring fee",
-      "Comprehensive deodorizing and deep cleaning",
+      "$200/month recurring maintenance",
+      "Comprehensive deodorizing",
       "Priority scheduling",
     ],
     featured: true,
   },
 ];
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
+const surfacePricing = [
+  { name: "Driveways", price: "$0.40 / sq ft" },
+  { name: "Deck & Patios", price: "$0.40 / sq ft" },
+  { name: "House Exterior", price: "Starting at $250" },
+  { name: "Roofs", price: "Starting at $300" },
+  { name: "Industrial Machine Cleaning", price: "$150/hr (4hr min)" },
+  { name: "Graffiti Removal & Gutter Cleaning", price: "Starting at $150" },
+];
+
+const pricingFactors = [
+  "Access & complexity (steep hillsides)",
+  "Amount of organics buildup",
+  "Delicate surfaces",
+  "Surrounding plants & trees",
+  "Travel time",
+  "Insurance coverage",
+];
 
 export default function Pricing() {
   return (
-    <div className="relative isolate bg-gray-900 px-6 py-16 sm:py-2 lg:px-8">
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl"
-      >
-        <div
-          style={{
-            clipPath:
-              "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-          }}
-          className="mx-auto aspect-1155/678 w-[72.1875rem] bg-gradient-to-tr from-[#4C6EF5] to-[#1D4ED8] opacity-20"
-        />
-      </div>
-      <div className="mx-auto max-w-4xl text-center">
-        <h2 className="text-base font-semibold text-blue-500">
-          Port Pressure Cleaning Plans
-        </h2>
-        <p className="mt-2 text-5xl font-semibold tracking-tight text-white sm:text-6xl">
-          Choose the right plan for your bin and dumpster pad cleaning needs
-        </p>
-      </div>
-      <p className="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-gray-400 sm:text-xl">
-        From residential bins to commercial dumpster pads, we offer flexible and
-        affordable plans to keep your spaces clean.
-      </p>
+    <section className="bg-slate-700 py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-base font-semibold uppercase tracking-widest text-cyan-400">
+            Pricing
+          </p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Simple, Transparent Pricing
+          </h2>
+          <p className="mt-4 text-lg text-slate-300">
+            Flexible pricing for residential and commercial cleaning needs.
+          </p>
+          <p className="mt-3 text-base font-medium text-cyan-400">
+            First-year customers receive exclusive discounts — contact us for details.
+          </p>
+        </div>
 
-      <div className="mx-auto mt-8 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-12 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
-        {tiers.map((tier) => (
-          <div
-            key={tier.id}
-            className={classNames(
-              tier.featured
-                ? "relative bg-charcoal-900 shadow-xl" // Featured tier styling
-                : "bg-gray-800 sm:mx-8 lg:mx-0", // Non-featured tier styling
-              "rounded-3xl p-8 ring-1 ring-gray-700 sm:p-10 h-full" // Ensures equal height and padding
-            )}
-          >
-            <h3
-              id={tier.id}
-              className={classNames(
-                tier.featured ? "text-blue-400" : "text-blue-500",
-                "text-base font-semibold"
-              )}
+        {/* Surface pricing grid */}
+        <div className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-3">
+          {surfacePricing.map((item) => (
+            <div
+              key={item.name}
+              className="rounded-xl bg-slate-800 border border-slate-600 p-6 text-center"
             >
-              {tier.name}
-            </h3>
-            <p className="mt-4 flex items-baseline gap-x-2">
-              <span
-                className={classNames(
-                  tier.featured ? "text-white" : "text-gray-100",
-                  "text-5xl font-semibold tracking-tight"
-                )}
-              >
-                {tier.priceMonthly}
-              </span>
-            </p>
-            <p
-              className={classNames(
-                tier.featured ? "text-gray-300" : "text-gray-200",
-                "mt-6 text-base"
-              )}
-            >
-              {tier.description}
-            </p>
-            <ul
-              role="list"
-              className={classNames(
-                tier.featured ? "text-gray-200" : "text-gray-200",
-                "mt-8 space-y-3 text-sm sm:mt-10"
-              )}
-            >
-              {tier.features.map((feature) => (
-                <li key={feature} className="flex gap-x-3">
-                  <CheckIcon
-                    aria-hidden="true"
-                    className={classNames(
-                      tier.featured ? "text-blue-400" : "text-blue-500",
-                      "h-6 w-5 flex-none"
-                    )}
-                  />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            {/* Changed href to "/contact" */}
-            <a
-              href="/contact" // Direct link to the Contact page
-              aria-describedby={tier.id}
-              className={classNames(
+              <p className="text-base font-semibold text-slate-200">{item.name}</p>
+              <p className="mt-2 text-2xl font-bold text-white">{item.price}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Key pricing factors */}
+        <div className="mt-10 rounded-xl bg-navy ring-2 ring-accent p-6 max-w-2xl mx-auto">
+          <h3 className="text-base font-semibold uppercase tracking-wider text-accent text-center">
+            Key Pricing Factors
+          </h3>
+          <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {pricingFactors.map((factor) => (
+              <li key={factor} className="flex items-center gap-2">
+                <CheckIcon className="h-5 w-5 flex-shrink-0 text-accent" />
+                <span className="text-base text-white">{factor}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Bin & dumpster plans */}
+        <div className="mt-16 grid max-w-lg mx-auto grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-2">
+          {tiers.map((tier) => (
+            <div
+              key={tier.name}
+              className={`rounded-2xl p-8 lg:p-10 ${
                 tier.featured
-                  ? "bg-blue-600 text-white shadow-xs hover:bg-blue-500 focus-visible:outline-blue-500"
-                  : "text-blue-500 ring-1 ring-blue-200 ring-inset hover:ring-blue-300 focus-visible:outline-blue-600",
-                "mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10"
-              )}
+                  ? "bg-navy text-white ring-2 ring-accent"
+                  : "bg-navy ring-2 ring-accent"
+              }`}
             >
-              Get started today
-            </a>
-          </div>
-        ))}
+              <h3 className="text-lg font-semibold text-accent">{tier.name}</h3>
+              <div className="mt-4 flex items-baseline gap-2">
+                <span className="text-4xl font-bold tracking-tight text-white">
+                  {tier.price}
+                </span>
+                <span className="text-base text-slate-400">/ {tier.period}</span>
+              </div>
+              <p className="mt-4 text-base leading-relaxed text-slate-300">
+                {tier.description}
+              </p>
+              <ul className="mt-8 space-y-3">
+                {tier.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3">
+                    <CheckIcon className="h-5 w-5 flex-shrink-0 mt-0.5 text-accent" />
+                    <span className="text-base text-slate-200">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/contact"
+                className={`mt-8 block rounded-lg px-4 py-3 text-center text-base font-semibold transition-colors ${
+                  tier.featured
+                    ? "bg-accent text-white hover:bg-accent-hover"
+                    : "bg-accent text-white hover:bg-accent-hover"
+                }`}
+              >
+                Get Started
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

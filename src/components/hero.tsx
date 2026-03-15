@@ -1,81 +1,50 @@
-"use client";
-
-import Edges from "./edges";
-import Link from "next/link"; // Import Link for Next.js navigation
-import Image from "next/image"; // Import Image component for optimized images
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div className="relative isolate bg-gray-900 px-6 py-30 sm:py-16 lg:px-8 max-h-screen overflow-hidden">
-      {/* Background Gradient Box (keeps old background) */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl"
-      >
-        <div
-          style={{
-            clipPath:
-              "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-          }}
-          className="mx-auto aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#4C6EF5] to-[#1D4ED8] opacity-20"
+    <section className="relative bg-navy pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden">
+      <div className="absolute inset-0">
+        <Image
+          src="/driveway.jpg"
+          alt="Pressure washing"
+          fill
+          className="object-cover opacity-15"
+          priority
+          sizes="100vw"
         />
       </div>
 
-      {/* Wrapping the content inside the Edges component */}
-      <Edges size="2xl">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {/* Main Content */}
-          <main className="relative flex items-center justify-center pt-1 pb-24 text-white z-10 mt-[30px] sm:mt-16 lg:mt-0">
-            <div className="mx-auto flex flex-col lg:flex-row items-center justify-between w-full px-6">
-              <div className="lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 sm:mt-16">
-                {/* Split Heading into Two Parts */}
-                <h2 className="text-5xl font-semibold text-blue-400 sm:text-6xl md:text-7xl">
-                  <span className="block">Welcome to</span>
-                  <span className="block text-white">Port Pressure</span>
-                </h2>
-                <p className="mt-4 text-lg text-gray-300 sm:text-xl md:text-2xl">
-                  Providing high-efficiency solutions for both industrial and
-                  residential systems. Get your systems optimized today!
-                </p>
-
-                {/* Add Flexbox to stack buttons vertically on small screens */}
-                <div className="mt-8 sm:flex sm:flex-col sm:items-center sm:space-y-4 sm:w-full sm:mt-6">
-                  <Link
-                    href="/contact" // Link to the Contact page
-                    className="inline-block bg-blue-600 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-blue-500 transition-all duration-300"
-                  >
-                    Get a Quote
-                  </Link>
-                  <Link
-                    href="/services" // Link to the Services page
-                    className="inline-block bg-gray-600 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-gray-700 transition-all duration-300"
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-
-              {/* Static Image (driveway.jpg) */}
-              <div className="lg:w-1/2 mt-[50px] lg:mt-0 relative w-full h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden border-4 border-blue-400 rounded-lg sm:mt-8">
-                <div className="absolute inset-0 w-full h-full">
-                  {/* Static image */}
-                  <Image
-                    src="/driveway.jpg" // Static Image (ensure it's optimized)
-                    alt="Driveway"
-                    width={1920} // Image width for optimization
-                    height={1080} // Image height for optimization
-                    className="object-cover w-full h-full"
-                    priority={true} // Prioritize loading for the first image for better performance
-                    loading="eager" // Eager loading for faster LCP
-                    quality={75} // Reduce quality slightly for a faster load
-                    sizes="(max-width: 768px) 100vw, 50vw" // Responsively load based on viewport width
-                  />
-                </div>
-              </div>
-            </div>
-          </main>
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-widest text-cyan-400">
+            Vancouver Island&apos;s Trusted Pressure Washing Pros
+          </p>
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            We make surfaces
+            <span className="text-accent"> look brand new</span>
+          </h1>
+          <p className="mt-6 text-lg text-slate-300 leading-relaxed">
+            Professional pressure washing for homes and businesses across
+            Vancouver Island. From driveways to heavy equipment, we bring the
+            power to get the job done right.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href="/contact"
+              className="rounded-lg bg-accent px-6 py-3 text-base font-semibold text-white hover:bg-accent-hover transition-colors"
+            >
+              Get a Free Quote
+            </Link>
+            <Link
+              href="/services"
+              className="rounded-lg border border-white/20 px-6 py-3 text-base font-semibold text-white hover:bg-white/10 transition-colors"
+            >
+              View Services
+            </Link>
+          </div>
         </div>
-      </Edges>
-    </div>
+      </div>
+    </section>
   );
 }

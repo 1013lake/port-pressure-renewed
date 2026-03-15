@@ -1,0 +1,234 @@
+[
+  {
+    "key": "group_homepage_modules",
+    "title": "Homepage Modules",
+    "fields": [
+      {
+        "key": "field_homepage_modules",
+        "label": "Modules",
+        "name": "modules",
+        "type": "flexible_content",
+        "layouts": {
+          "layout_hero": {
+            "key": "layout_hero",
+            "name": "hero",
+            "label": "Hero",
+            "display": "block",
+            "sub_fields": [
+              {
+                "key": "field_hero_tag",
+                "label": "Tag Line",
+                "name": "tag_line",
+                "type": "text"
+              },
+              {
+                "key": "field_hero_title",
+                "label": "Title",
+                "name": "title",
+                "type": "text"
+              },
+              {
+                "key": "field_hero_highlight",
+                "label": "Highlighted Text",
+                "name": "highlight",
+                "type": "text"
+              },
+              {
+                "key": "field_hero_description",
+                "label": "Description",
+                "name": "description",
+                "type": "textarea"
+              },
+              {
+                "key": "field_hero_cta_text",
+                "label": "CTA Button Text",
+                "name": "cta_text",
+                "type": "text",
+                "default_value": "Get a Free Quote"
+              },
+              {
+                "key": "field_hero_cta_link",
+                "label": "CTA Button Link",
+                "name": "cta_link",
+                "type": "text",
+                "default_value": "/contact"
+              },
+              {
+                "key": "field_hero_secondary_text",
+                "label": "Secondary Button Text",
+                "name": "secondary_text",
+                "type": "text",
+                "default_value": "View Services"
+              },
+              {
+                "key": "field_hero_secondary_link",
+                "label": "Secondary Button Link",
+                "name": "secondary_link",
+                "type": "text",
+                "default_value": "/services"
+              },
+              {
+                "key": "field_hero_bg_image",
+                "label": "Background Image",
+                "name": "bg_image",
+                "type": "image",
+                "return_format": "url"
+              }
+            ]
+          },
+          "layout_services": {
+            "key": "layout_services",
+            "name": "services",
+            "label": "Services",
+            "display": "block",
+            "sub_fields": [
+              {
+                "key": "field_services_tag",
+                "label": "Tag Line",
+                "name": "tag_line",
+                "type": "text",
+                "default_value": "What We Do"
+              },
+              {
+                "key": "field_services_title",
+                "label": "Title",
+                "name": "title",
+                "type": "text",
+                "default_value": "Our Services"
+              },
+              {
+                "key": "field_services_description",
+                "label": "Description",
+                "name": "description",
+                "type": "textarea"
+              },
+              {
+                "key": "field_services_items",
+                "label": "Service Items",
+                "name": "items",
+                "type": "repeater",
+                "sub_fields": [
+                  {
+                    "key": "field_service_name",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text"
+                  },
+                  {
+                    "key": "field_service_description",
+                    "label": "Description",
+                    "name": "description",
+                    "type": "textarea"
+                  },
+                  {
+                    "key": "field_service_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "url"
+                  }
+                ]
+              }
+            ]
+          },
+          "layout_testimonials": {
+            "key": "layout_testimonials",
+            "name": "testimonials",
+            "label": "Testimonials",
+            "display": "block",
+            "sub_fields": [
+              {
+                "key": "field_testimonials_tag",
+                "label": "Tag Line",
+                "name": "tag_line",
+                "type": "text",
+                "default_value": "Testimonials"
+              },
+              {
+                "key": "field_testimonials_title",
+                "label": "Title",
+                "name": "title",
+                "type": "text",
+                "default_value": "What Our Clients Say"
+              },
+              {
+                "key": "field_testimonials_items",
+                "label": "Testimonials",
+                "name": "items",
+                "type": "repeater",
+                "sub_fields": [
+                  {
+                    "key": "field_testimonial_name",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text"
+                  },
+                  {
+                    "key": "field_testimonial_location",
+                    "label": "Location",
+                    "name": "location",
+                    "type": "text"
+                  },
+                  {
+                    "key": "field_testimonial_text",
+                    "label": "Review Text",
+                    "name": "text",
+                    "type": "textarea"
+                  }
+                ]
+              }
+            ]
+          },
+          "layout_cta": {
+            "key": "layout_cta",
+            "name": "cta",
+            "label": "Call to Action",
+            "display": "block",
+            "sub_fields": [
+              {
+                "key": "field_cta_title",
+                "label": "Title",
+                "name": "title",
+                "type": "text",
+                "default_value": "Ready to get started?"
+              },
+              {
+                "key": "field_cta_description",
+                "label": "Description",
+                "name": "description",
+                "type": "textarea"
+              },
+              {
+                "key": "field_cta_button_text",
+                "label": "Button Text",
+                "name": "button_text",
+                "type": "text",
+                "default_value": "Get Your Free Quote"
+              },
+              {
+                "key": "field_cta_button_link",
+                "label": "Button Link",
+                "name": "button_link",
+                "type": "text",
+                "default_value": "/contact"
+              }
+            ]
+          }
+        },
+        "button_label": "Add Module",
+        "min": "",
+        "max": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page_template",
+          "operator": "==",
+          "value": "default"
+        }
+      ]
+    ],
+    "active": true
+  }
+]

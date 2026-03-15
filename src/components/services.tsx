@@ -1,101 +1,100 @@
-import React from "react";
-import Image from "next/image"; // Import the Image component for optimization
-import Edges from "./edges"; // Ensure Edges component is imported
+import Image from "next/image";
 
-// Example service images, replace with actual images
 const services = [
   {
-    id: 1,
+    name: "Driveway & Cement Cleaning",
+    description:
+      "Remove years of grime, oil stains, and buildup from concrete and paved surfaces.",
+    image: "/driveway.jpg",
+  },
+  {
     name: "Heavy Machinery Cleaning",
-    imageUrl: "/980clean.jpg",
-    width: 500,
-    height: 300,
-  },
-  { id: 2, name: "Walkways", imageUrl: "/brick.jpg", width: 500, height: 300 },
-  {
-    id: 3,
-    name: "Driveways / Cement",
-    imageUrl: "/driveway.jpg",
-    width: 500,
-    height: 300,
+    description:
+      "Industrial-grade cleaning for excavators, loaders, and heavy equipment.",
+    image: "/980clean.jpg",
   },
   {
-    id: 4,
-    name: "Graffiti Removal",
-    imageUrl: "/graffiti.jpg",
-    width: 500,
-    height: 300,
-  },
-  {
-    id: 5,
-    name: "Bin Cleaning",
-    imageUrl: "/bluetrash.jpg",
-    width: 500,
-    height: 300,
-  },
-  {
-    id: 6,
-    name: "Pad Cleaning",
-    imageUrl: "/padcleaning.jpeg",
-    width: 500,
-    height: 300,
-  },
-  {
-    id: 7,
     name: "Exterior House Wash",
-    imageUrl: "/siding.png",
-    width: 500,
-    height: 300,
+    description:
+      "Gentle yet thorough cleaning of siding, stucco, and exterior walls.",
+    image: "/siding.png",
   },
-  { id: 8, name: "Decking", imageUrl: "/wood.png", width: 500, height: 300 },
   {
-    id: 9,
+    name: "Deck & Fence Cleaning",
+    description:
+      "Restore the natural beauty of your wood or composite outdoor surfaces.",
+    image: "/wood.png",
+  },
+  {
+    name: "Bin & Dumpster Pad Cleaning",
+    description:
+      "Eliminate odors and bacteria from garbage bins and commercial dumpster areas.",
+    image: "/bluetrash.jpg",
+  },
+  {
+    name: "Graffiti Removal",
+    description:
+      "Professional removal of graffiti from brick, concrete, and painted surfaces.",
+    image: "/graffiti.jpg",
+  },
+  {
+    name: "Walkway & Brick Cleaning",
+    description:
+      "Bring walkways, patios, and brick surfaces back to their original look.",
+    image: "/brick.jpg",
+  },
+  {
     name: "Gutter Cleaning",
-    imageUrl: "/gutter.jpg",
-    width: 500,
-    height: 300,
-  }, // Adding a 9th item
+    description:
+      "Clear out debris and buildup to keep your gutters flowing properly.",
+    image: "/gutter.jpg",
+  },
 ];
 
-export default function ServicesProvided() {
+export default function Services() {
   return (
-    <section className="bg-gray-900 text-white py-16 lg:py-24 sm:pt-24 pt-10">
-      {/* Wrapping the section inside Edges to match the consistent theme */}
-      <Edges size="1xl">
-        <div className="px-6 lg:px-8">
-          <h2 className="text-3xl font-semibold text-center sm:text-4xl text-blue-400 mb-8">
-            Services We Provide
+    <section className="bg-slate-800 py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto">
+          <p className="text-base font-semibold uppercase tracking-widest text-cyan-400">
+            What We Do
+          </p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Our Services
           </h2>
+          <p className="mt-4 text-lg text-slate-300">
+            From residential to commercial, we have the tools and expertise to
+            handle any cleaning job.
+          </p>
+        </div>
 
-          {/* Grid layout with responsive classes for better performance */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="flex flex-col items-center justify-center bg-blue-300 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              >
-                {/* Image with responsive loading */}
-                <div className="w-full h-48 relative">
-                  <Image
-                    src={service.imageUrl}
-                    alt={service.name}
-                    width={service.width}
-                    height={service.height}
-                    className="w-full h-full object-cover"
-                    priority={true} // Use 'priority' for above-the-fold images
-                    // Alternatively, you can use loading="lazy" for below-the-fold images
-                    // loading="lazy" // Uncomment this if the image is below the fold
-                    sizes="(max-width: 768px) 100vw, 33vw" // Responsively handle image size
-                  />
-                </div>
-                <p className="text-lg font-medium text-gray-900 mt-4">
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((service) => (
+            <div
+              key={service.name}
+              className="group relative overflow-hidden rounded-xl bg-slate-700 border border-slate-600 hover:border-accent/40 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={service.image}
+                  alt={service.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-semibold text-white">
                   {service.name}
+                </h3>
+                <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                  {service.description}
                 </p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </Edges>
+      </div>
     </section>
   );
 }

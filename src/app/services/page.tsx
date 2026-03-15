@@ -1,45 +1,19 @@
-import React from "react";
-
-import Pricing from "@/components/pricing-sections";
-
-import Testimonial from "@/components/testimonial";
-
 import Services from "@/components/services";
+import Pricing from "@/components/pricing-sections";
+import CTA from "@/components/cta";
 
-function IndexPage() {
+export default function ServicesPage() {
   return (
-    <div>
+    <div className="pt-[72px]">
       <Services />
       <Pricing />
-      <Testimonial />
+      <CTA />
     </div>
   );
 }
 
-export default IndexPage;
 export const metadata = {
-  title: "Port-Pressure",
-  description: "Welcome to our site — here's what we do.",
-  keywords: ["nextjs", "seo", "website"],
-  openGraph: {
-    title: "Port-Pressure",
-    description: "Welcome to our site — here's what we do.",
-    url: "https://yourdomain.com/",
-    siteName: "Your Site Name",
-    images: [
-      {
-        url: "pressurelogow.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Home | Your Site Name",
-    description: "Welcome to our site — here's what we do.",
-    images: ["https://yourdomain.com/og-image.jpg"],
-  },
+  title: "Services | Port Pressure Solutions",
+  description:
+    "Pressure washing services including driveways, decks, siding, heavy equipment, bin cleaning, and more across Vancouver Island.",
 };
