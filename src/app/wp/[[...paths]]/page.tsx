@@ -1,12 +1,11 @@
 import {
   WordpressTemplate,
-  generateMetadata as nextwpGenerateMetadata,
-  generateStaticParams as nextwpGenerateStaticParams,
   type RouteParams,
   type SearchParams,
 } from "@nextwp/core";
-import type { Metadata } from "next";
 import templates from "@/templates";
+
+export const dynamic = "force-dynamic";
 
 export default async function WpPage(props: {
   params: Promise<RouteParams>;
@@ -24,22 +23,4 @@ export default async function WpPage(props: {
       />
     </div>
   );
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<RouteParams>;
-}): Promise<Metadata> {
-  const resolvedParams = await params;
-  const meta = await nextwpGenerateMetadata({ params: resolvedParams });
-  return meta as Metadata;
-}
-
-export async function generateStaticParams(): Promise<{ paths?: string[] }[]> {
-  const result = await nextwpGenerateStaticParams();
-  if (Array.isArray(result)) {
-    return result as { paths?: string[] }[];
-  }
-  return [{ paths: undefined }];
 }
