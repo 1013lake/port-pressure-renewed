@@ -1,7 +1,7 @@
 import {
   WordpressTemplate,
   generateMetadata as nextwpGenerateMetadata,
-  generateStaticParams,
+  generateStaticParams as nextwpGenerateStaticParams,
   type RouteParams,
   type SearchParams,
 } from "@nextwp/core";
@@ -36,4 +36,10 @@ export async function generateMetadata({
   return meta as Metadata;
 }
 
-export { generateStaticParams };
+export async function generateStaticParams(): Promise<{ paths?: string[] }[]> {
+  const result = await nextwpGenerateStaticParams();
+  if (Array.isArray(result)) {
+    return result as { paths?: string[] }[];
+  }
+  return [{ paths: undefined }];
+}
