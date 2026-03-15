@@ -1,55 +1,6 @@
 import Image from "next/image";
-
-const services = [
-  {
-    name: "Driveway & Cement Cleaning",
-    description:
-      "Remove years of grime, oil stains, and buildup from concrete and paved surfaces.",
-    image: "/driveway.jpg",
-  },
-  {
-    name: "Heavy Machinery Cleaning",
-    description:
-      "Industrial-grade cleaning for excavators, loaders, and heavy equipment.",
-    image: "/980clean.jpg",
-  },
-  {
-    name: "Exterior House Wash",
-    description:
-      "Gentle yet thorough cleaning of siding, stucco, and exterior walls.",
-    image: "/siding.png",
-  },
-  {
-    name: "Deck & Fence Cleaning",
-    description:
-      "Restore the natural beauty of your wood or composite outdoor surfaces.",
-    image: "/wood.png",
-  },
-  {
-    name: "Bin & Dumpster Pad Cleaning",
-    description:
-      "Eliminate odors and bacteria from garbage bins and commercial dumpster areas.",
-    image: "/bluetrash.jpg",
-  },
-  {
-    name: "Graffiti Removal",
-    description:
-      "Professional removal of graffiti from brick, concrete, and painted surfaces.",
-    image: "/graffiti.jpg",
-  },
-  {
-    name: "Walkway & Brick Cleaning",
-    description:
-      "Bring walkways, patios, and brick surfaces back to their original look.",
-    image: "/brick.jpg",
-  },
-  {
-    name: "Gutter Cleaning",
-    description:
-      "Clear out debris and buildup to keep your gutters flowing properly.",
-    image: "/gutter.jpg",
-  },
-];
+import Link from "next/link";
+import { services } from "@/data/services";
 
 export default function Services() {
   return (
@@ -70,8 +21,9 @@ export default function Services() {
 
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => (
-            <div
-              key={service.name}
+            <Link
+              key={service.slug}
+              href={`/services/${service.slug}`}
               className="group relative overflow-hidden rounded-xl bg-slate-700 border border-slate-600 hover:border-accent/40 hover:shadow-lg transition-all duration-300"
             >
               <div className="relative h-48 overflow-hidden">
@@ -88,10 +40,13 @@ export default function Services() {
                   {service.name}
                 </h3>
                 <p className="mt-2 text-sm text-slate-300 leading-relaxed">
-                  {service.description}
+                  {service.shortDescription}
                 </p>
+                <span className="mt-3 inline-block text-sm font-medium text-cyan-400 group-hover:text-cyan-300 transition-colors">
+                  Learn more &rarr;
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

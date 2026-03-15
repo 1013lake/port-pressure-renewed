@@ -6,12 +6,7 @@ const people = [
     role: "Owner / Operator",
     imageUrl: "/pressurelogow.png",
   },
-  {
-    name: "Brendo",
-    role: "Company High Jacker",
-    imageUrl: "/pressurelogow.png",
-  },
-  {
+{
     name: "Rene",
     role: "Mentor",
     imageUrl: "/pressurelogow.png",

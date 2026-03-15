@@ -4,7 +4,7 @@ import { useState, useEffect, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error" | "ratelimited">(
     "idle"
   );
   const [message, setMessage] = useState("");
@@ -37,6 +37,8 @@ export default function ContactForm() {
         setStatus("sent");
         form.reset();
         setMessage("");
+      } else if (res.status === 429) {
+        setStatus("ratelimited");
       } else {
         setStatus("error");
       }
@@ -95,7 +97,7 @@ export default function ContactForm() {
                 htmlFor="email"
                 className="block text-sm font-medium text-slate-200"
               >
-                Email <span className="text-slate-400 font-normal">(optional)</span>
+                Email
               </label>
               <input
                 type="email"
@@ -160,6 +162,11 @@ export default function ContactForm() {
           {status === "error" && (
             <p className="text-center text-red-400 font-medium">
               Something went wrong. Please try again.
+            </p>
+          )}
+          {status === "ratelimited" && (
+            <p className="text-center text-amber-400 font-medium">
+              Daily message limit reached. Please try again tomorrow.
             </p>
           )}
         </form>

@@ -15,12 +15,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portpressure.alberni.dev"),
   title: "Port Pressure Solutions",
   description:
     "Professional pressure washing services on Vancouver Island. Residential and commercial cleaning.",
   icons: {
-    icon: "/pressurelogo.png",
-    apple: "/pressurelogo.png",
+    icon: "/pressurelogow.png",
+    apple: "/pressurelogow.png",
+  },
+  openGraph: {
+    title: "Port Pressure Solutions",
+    description:
+      "Professional pressure washing services on Vancouver Island. Residential and commercial cleaning.",
+    images: [
+      {
+        url: "/pressurelogow.png",
+        width: 1024,
+        height: 1024,
+        alt: "Port Pressure Solutions Logo",
+      },
+    ],
+    siteName: "Port Pressure Solutions",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Port Pressure Solutions",
+    description:
+      "Professional pressure washing services on Vancouver Island. Residential and commercial cleaning.",
+    images: ["/pressurelogow.png"],
   },
 };
 

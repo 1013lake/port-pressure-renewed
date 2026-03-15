@@ -36,9 +36,9 @@ const surfacePricing = [
   { name: "Driveways", price: "$0.40 / sq ft" },
   { name: "Deck & Patios", price: "$0.40 / sq ft" },
   { name: "House Exterior", price: "Starting at $250" },
-  { name: "Roofs", price: "Starting at $300" },
   { name: "Industrial Machine Cleaning", price: "$150/hr (4hr min)" },
   { name: "Graffiti Removal & Gutter Cleaning", price: "Starting at $150" },
+  { name: "Roofs", price: "Coming Soon", note: "Pending equipment expansion — available in a future update" },
 ];
 
 const pricingFactors = [
@@ -74,10 +74,13 @@ export default function Pricing() {
           {surfacePricing.map((item) => (
             <div
               key={item.name}
-              className="rounded-xl bg-slate-800 border border-slate-600 p-6 text-center"
+              className={`rounded-xl bg-slate-800 border p-6 text-center ${item.note ? "border-slate-600/50 opacity-70" : "border-slate-600"}`}
             >
               <p className="text-base font-semibold text-slate-200">{item.name}</p>
-              <p className="mt-2 text-2xl font-bold text-white">{item.price}</p>
+              <p className={`mt-2 text-2xl font-bold ${item.note ? "text-slate-400" : "text-white"}`}>{item.price}</p>
+              {item.note && (
+                <p className="mt-2 text-xs text-slate-400">{item.note}</p>
+              )}
             </div>
           ))}
         </div>
