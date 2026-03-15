@@ -13,7 +13,15 @@ export default function ServicesPage() {
 }
 
 export const metadata = {
-  title: "Services | Port Pressure Solutions",
+  title: "Pressure Washing Services | Port Pressure Solutions — Port Alberni, BC",
   description:
-    "Pressure washing services including driveways, decks, siding, heavy equipment, bin cleaning, and more across Vancouver Island.",
+    "Pressure washing services in Port Alberni including driveways, decks, siding, heavy equipment, bin cleaning, and more across Vancouver Island.",
+  openGraph: {
+    title: "Pressure Washing Services | Port Pressure Solutions",
+    description:
+      "Pressure washing services in Port Alberni including driveways, decks, siding, heavy equipment, and more.",
+    images: [{ url: "/pressurelogow.png", width: 1200, height: 630 }],
+    locale: "en_CA",
+    type: "website",
+  },
 };

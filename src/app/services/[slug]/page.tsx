@@ -20,6 +20,13 @@ export async function generateMetadata({
   return {
     title: `${service.name} | Port Pressure Solutions — Port Alberni, BC`,
     description: `${service.shortDescription} Professional pressure washing in Port Alberni and across Vancouver Island.`,
+    openGraph: {
+      title: `${service.name} | Port Pressure Solutions`,
+      description: `${service.shortDescription} Professional pressure washing in Port Alberni.`,
+      images: [{ url: service.image, width: 1200, height: 630 }],
+      locale: "en_CA",
+      type: "website",
+    },
   };
 }
 

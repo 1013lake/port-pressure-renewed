@@ -21,13 +21,13 @@ export default function Hero() {
             Vancouver Island&apos;s Trusted Pressure Washing Pros
           </p>
           <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            We make surfaces
-            <span className="text-accent"> look brand new</span>
+            Port Alberni
+            <span className="text-accent"> Pressure Washing</span>
           </h1>
           <p className="mt-6 text-lg text-slate-300 leading-relaxed">
-            Professional pressure washing for homes and businesses across
-            Vancouver Island. From driveways to heavy equipment, we bring the
-            power to get the job done right.
+            Professional pressure washing for homes and businesses in Port
+            Alberni and across Vancouver Island. From driveways to heavy
+            equipment, we bring the power to get the job done right.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link

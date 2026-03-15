@@ -14,7 +14,15 @@ export default function ContactPage() {
 }
 
 export const metadata = {
-  title: "Contact | Port Pressure Solutions",
+  title: "Contact | Port Pressure Solutions — Port Alberni, BC",
   description:
-    "Get a free quote for pressure washing services on Vancouver Island. Contact Port Pressure Solutions today.",
+    "Get a free quote for pressure washing services in Port Alberni and across Vancouver Island. Contact Port Pressure Solutions today.",
+  openGraph: {
+    title: "Contact Port Pressure Solutions",
+    description:
+      "Get a free quote for pressure washing services in Port Alberni and across Vancouver Island.",
+    images: [{ url: "/pressurelogow.png", width: 1200, height: 630 }],
+    locale: "en_CA",
+    type: "website",
+  },
 };

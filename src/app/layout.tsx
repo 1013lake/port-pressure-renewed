@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Port Pressure Solutions",
     description:
-      "Professional pressure washing services on Vancouver Island. Residential and commercial cleaning.",
+      "Professional pressure washing services in Port Alberni and across Vancouver Island.",
     images: [
       {
         url: "/pressurelogow.png",
@@ -36,6 +36,7 @@ export const metadata: Metadata = {
       },
     ],
     siteName: "Port Pressure Solutions",
+    locale: "en_CA",
     type: "website",
   },
   twitter: {
