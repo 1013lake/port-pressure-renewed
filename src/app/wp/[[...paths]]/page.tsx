@@ -1,10 +1,11 @@
 import {
   WordpressTemplate,
-  generateMetadata,
+  generateMetadata as nextwpGenerateMetadata,
   generateStaticParams,
   type RouteParams,
   type SearchParams,
 } from "@nextwp/core";
+import type { Metadata } from "next";
 import templates from "@/templates";
 
 export default async function WpPage(props: {
@@ -25,4 +26,14 @@ export default async function WpPage(props: {
   );
 }
 
-export { generateMetadata, generateStaticParams };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const meta = await nextwpGenerateMetadata({ params: resolvedParams });
+  return meta as Metadata;
+}
+
+export { generateStaticParams };
