@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getStore } from "@netlify/blobs";
 
-const isNetlify = !!process.env.NETLIFY;
+// Use Blobs if we have API credentials, otherwise fall back to local fs
+const hasBlobs = !!(process.env.NETLIFY_SITE_ID && process.env.NETLIFY_API_TOKEN);
 
 // --- Local JSON fallback for dev (dynamic imports to avoid bundling fs on Netlify) ---
 async function readLocalBookings(): Promise<Record<string, string[]>> {
@@ -26,12 +27,10 @@ async function writeLocalBookings(data: Record<string, string[]>) {
 
 // --- Netlify Blobs (explicit API token auth) ---
 function getBookingsStore() {
-  const siteID = process.env.NETLIFY_SITE_ID || "";
-  const token = process.env.NETLIFY_API_TOKEN || "";
   return getStore({
     name: "bookings",
-    siteID,
-    token,
+    siteID: process.env.NETLIFY_SITE_ID!,
+    token: process.env.NETLIFY_API_TOKEN!,
   });
 }
 
@@ -46,26 +45,26 @@ function checkAdmin(req: Request): boolean {
 
 // GET: return booked slots for a given month/year
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const year = searchParams.get("year");
-  const month = searchParams.get("month");
-
-  if (!year || !month) {
-    return NextResponse.json({ error: "year and month required" }, { status: 400 });
-  }
-
-  if (!isNetlify) {
-    const all = await readLocalBookings();
-    const booked: Record<string, string[]> = {};
-    const daysInMonth = new Date(Number(year), Number(month) + 1, 0).getDate();
-    for (let d = 1; d <= daysInMonth; d++) {
-      const key = `${year}-${String(Number(month) + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-      if (all[key]?.length) booked[d] = all[key];
-    }
-    return NextResponse.json({ booked });
-  }
-
   try {
+    const { searchParams } = new URL(req.url);
+    const year = searchParams.get("year");
+    const month = searchParams.get("month");
+
+    if (!year || !month) {
+      return NextResponse.json({ error: "year and month required" }, { status: 400 });
+    }
+
+    if (!hasBlobs) {
+      const all = await readLocalBookings();
+      const booked: Record<string, string[]> = {};
+      const daysInMonth = new Date(Number(year), Number(month) + 1, 0).getDate();
+      for (let d = 1; d <= daysInMonth; d++) {
+        const key = `${year}-${String(Number(month) + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+        if (all[key]?.length) booked[d] = all[key];
+      }
+      return NextResponse.json({ booked });
+    }
+
     const store = getBookingsStore();
     const daysInMonth = new Date(Number(year), Number(month) + 1, 0).getDate();
     const booked: Record<string, string[]> = {};
@@ -87,44 +86,44 @@ export async function GET(req: Request) {
 
 // POST: toggle a slot (book or unbook) — admin only
 export async function POST(req: Request) {
-  if (!checkAdmin(req)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const { date, time, authCheck } = await req.json();
-
-  if (authCheck) {
-    return NextResponse.json({ success: true });
-  }
-
-  if (!date || !time) {
-    return NextResponse.json({ error: "date and time required" }, { status: 400 });
-  }
-
-  if (!isNetlify) {
-    const all = await readLocalBookings();
-    const slots = all[date] || [];
-
-    let action: "booked" | "unbooked";
-    if (slots.includes(time)) {
-      slots.splice(slots.indexOf(time), 1);
-      action = "unbooked";
-    } else {
-      slots.push(time);
-      action = "booked";
-    }
-
-    if (slots.length > 0) {
-      all[date] = slots;
-    } else {
-      delete all[date];
-    }
-
-    await writeLocalBookings(all);
-    return NextResponse.json({ success: true, action, slots });
-  }
-
   try {
+    if (!checkAdmin(req)) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { date, time, authCheck } = await req.json();
+
+    if (authCheck) {
+      return NextResponse.json({ success: true, hasBlobs });
+    }
+
+    if (!date || !time) {
+      return NextResponse.json({ error: "date and time required" }, { status: 400 });
+    }
+
+    if (!hasBlobs) {
+      const all = await readLocalBookings();
+      const slots = all[date] || [];
+
+      let action: "booked" | "unbooked";
+      if (slots.includes(time)) {
+        slots.splice(slots.indexOf(time), 1);
+        action = "unbooked";
+      } else {
+        slots.push(time);
+        action = "booked";
+      }
+
+      if (slots.length > 0) {
+        all[date] = slots;
+      } else {
+        delete all[date];
+      }
+
+      await writeLocalBookings(all);
+      return NextResponse.json({ success: true, action, slots });
+    }
+
     const store = getBookingsStore();
     const key = dateKey(date);
     const existing = await store.get(key);
