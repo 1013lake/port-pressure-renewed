@@ -7,15 +7,18 @@ import {
 } from "@nextwp/core";
 import templates from "@/templates";
 
-export default function WpPage(props: {
-  params: RouteParams;
-  searchParams?: SearchParams;
+export default async function WpPage(props: {
+  params: Promise<RouteParams>;
+  searchParams?: Promise<SearchParams>;
 }) {
+  const params = await props.params;
+  const searchParams = props.searchParams ? await props.searchParams : undefined;
+
   return (
     <div className="pt-[72px]">
       <WordpressTemplate
-        params={props.params}
-        searchParams={props.searchParams}
+        params={params}
+        searchParams={searchParams}
         templates={templates}
       />
     </div>
