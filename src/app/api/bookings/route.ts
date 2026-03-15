@@ -26,7 +26,7 @@ async function writeLocalBookings(data: Record<string, string[]>) {
 
 // --- Netlify Blobs ---
 function getBookingsStore() {
-  return getStore({ name: "bookings", consistency: "strong" });
+  return getStore("bookings");
 }
 
 function dateKey(date: string) {
@@ -64,7 +64,6 @@ export async function GET(req: Request) {
     const daysInMonth = new Date(Number(year), Number(month) + 1, 0).getDate();
     const booked: Record<string, string[]> = {};
 
-    // Parallel reads instead of sequential
     const reads = Array.from({ length: daysInMonth }, (_, i) => {
       const d = i + 1;
       const key = dateKey(`${year}-${String(Number(month) + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`);
@@ -75,8 +74,8 @@ export async function GET(req: Request) {
     await Promise.all(reads);
 
     return NextResponse.json({ booked });
-  } catch {
-    return NextResponse.json({ booked: {} });
+  } catch (err) {
+    return NextResponse.json({ booked: {}, error: String(err) });
   }
 }
 
@@ -88,7 +87,6 @@ export async function POST(req: Request) {
 
   const { date, time, authCheck } = await req.json();
 
-  // Auth-only check (used by admin login)
   if (authCheck) {
     return NextResponse.json({ success: true });
   }
@@ -143,7 +141,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true, action, slots });
   } catch (err) {
-    console.error("Booking toggle error:", err);
-    return NextResponse.json({ error: "Failed to update booking" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to update booking", detail: String(err) },
+      { status: 500 }
+    );
   }
 }
