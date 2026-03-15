@@ -1,0 +1,6 @@
+[build]
+  command = "npm install -g pnpm && pnpm install --frozen-lockfile && pnpm build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
